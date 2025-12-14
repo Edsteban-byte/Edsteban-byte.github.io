@@ -1,0 +1,640 @@
+/* =========================================
+   1. CSS VARIABLES & THEME SETUP
+   ========================================= */
+:root {
+    /* --- Light Mode (Default) --- */
+    --bg-gradient: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 50%, #bae6fd 100%);
+
+    /* Glass Effect */
+    --glass-bg: rgba(255, 255, 255, 0.45);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.6);
+    --nav-glass: rgba(255, 255, 255, 0.85);
+    /* Slightly less see-through for nav */
+    --backdrop-blur: blur(12px);
+
+    /* Colors */
+    --text-color: #334155;
+    /* Dark Grey for readability */
+    --heading-color: #0c4a6e;
+    /* Dark Blue */
+    --primary: #0ea5e9;
+    /* Sky Blue */
+    --accent: #38bdf8;
+    --input-bg: rgba(255, 255, 255, 0.6);
+
+    /* Geometry */
+    --radius-card: 25px;
+    --radius-btn: 50px;
+    /* Pill shape */
+}
+
+body.dark-mode {
+    /* --- Dark Mode Overrides --- */
+    --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #172554 100%);
+
+    /* Glass Effect */
+    --glass-bg: rgba(15, 23, 42, 0.65);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+    --nav-glass: rgba(15, 23, 42, 0.95);
+
+    /* Colors - High Contrast */
+    --text-color: #f1f5f9;
+    /* OFF-WHITE (Fixed for readability) */
+    --heading-color: #ffffff;
+    /* PURE WHITE */
+    --primary: #38bdf8;
+    /* Bright Cyan */
+    --input-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* =========================================
+   2. GLOBAL RESET & SCROLL ENGINE
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+    /* Smooth hover/theme transitions */
+}
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+    /* Hide default scrollbar, let main handle it */
+}
+
+/* The Background Gradient */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-gradient);
+    z-index: -1;
+}
+
+/* Scroll Snap Container */
+main {
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    position: relative;
+}
+
+/* =========================================
+   3. REUSABLE CLASSES
+   ========================================= */
+.container {
+    max-width: 1100px;
+    width: 100%;
+}
+
+/* Glassmorphism Utility */
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: var(--backdrop-blur);
+    border: var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: var(--radius-btn);
+    text-decoration: none;
+    font-weight: 600;
+    margin: 10px 5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.primary-btn {
+    background: var(--primary);
+    color: white;
+}
+
+.secondary-btn {
+    background: var(--glass-bg);
+    border: 2px solid var(--primary);
+    color: var(--primary);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+/* Typography */
+.section-title {
+    font-size: 2.5rem;
+    color: var(--heading-color);
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 700;
+}
+
+/* Scroll Animations */
+.hidden {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+    transition: all 1s ease-out;
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* =========================================
+   4. HEADER & NAVIGATION
+   ========================================= */
+header {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1200px;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 35px;
+    border-radius: 50px;
+}
+
+.logo {
+    font-weight: 800;
+    color: var(--primary);
+    font-size: 1.5rem;
+}
+
+/* Desktop Nav */
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+/* Header Icons (Theme + Hamburger) */
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#theme-toggle {
+    background: var(--primary);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hamburger (Hidden on Desktop) */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: var(--text-color);
+}
+
+/* =========================================
+   5. SECTIONS LAYOUT
+   ========================================= */
+section {
+    min-height: 100vh;
+    width: 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+
+    /* Center Content Vertically */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 90px 20px 20px 20px;
+    /* Top padding clears fixed header */
+}
+
+/* =========================================
+   HOME SECTION LAYOUT (Grid)
+   ========================================= */
+
+/* Desktop Layout (Big Screen) */
+.home-grid {
+    display: grid;
+    /* 1.4fr for text, 1fr for image (Text takes slightly more space) */
+    grid-template-columns: 1.4fr 1fr;
+    align-items: center;
+    /* Vertically center both */
+    gap: 2rem;
+    text-align: left;
+    /* Text aligns left on desktop */
+}
+
+.intro-text h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    color: var(--heading-color);
+}
+
+.intro-text p {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+}
+
+/* Button Alignment on Desktop */
+.btn-group {
+    text-align: left;
+}
+
+
+/* =========================================
+   PROFILE PHOTO (Right Side)
+   ========================================= */
+.profile-wrapper {
+    width: 280px;
+    /* Larger size for Desktop */
+    height: 280px;
+    position: relative;
+    z-index: 2;
+
+    /* Push it to the center of its grid cell */
+    margin: 0 auto;
+
+    /* The Animation */
+    animation: float 6s ease-in-out infinite;
+}
+
+.profile-pic {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid var(--glass-bg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Hover Effect */
+.profile-wrapper:hover .profile-pic {
+    transform: scale(1.05) rotate(2deg);
+    border-color: var(--primary);
+    box-shadow: 0 15px 40px rgba(14, 165, 233, 0.4);
+}
+
+
+/* =========================================
+   MOBILE RESPONSIVE (Stacking)
+   ========================================= */
+@media (max-width: 900px) {
+    /* Adjust breakpoint if needed */
+
+    .home-grid {
+        /* Switch to single column */
+        grid-template-columns: 1fr;
+        text-align: center;
+        /* Revert to center align */
+        gap: 3rem;
+    }
+
+    /* REORDER: Image goes to top */
+    .profile-wrapper {
+        order: -1;
+        /* visually moves it before the text */
+        width: 180px;
+        /* Smaller size for Mobile */
+        height: 180px;
+        margin: 0 auto;
+    }
+
+    .intro-text h1 {
+        font-size: 2.5rem;
+    }
+
+    .btn-group {
+        text-align: center;
+    }
+}
+
+/* Animation Keyframes (Kept same as before) */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Intro Specific */
+#home h1 {
+    font-size: 3.5rem;
+    color: var(--heading-color);
+    text-align: center;
+}
+
+#home p {
+    color: var(--text-color);
+    text-align: center;
+}
+
+#home .btn-group {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+/* =========================================
+   6. PROJECTS (Grid)
+   ========================================= */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    padding: 2rem;
+    border-radius: var(--radius-card);
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border: 1px solid var(--primary);
+}
+
+.card h3 {
+    color: var(--heading-color);
+    margin-bottom: 0.5rem;
+}
+
+.card p {
+    color: var(--text-color);
+    font-size: 0.95rem;
+}
+
+.project-link {
+    color: var(--primary);
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+/* =========================================
+   7. SKILLS (Centered Cloud)
+   ========================================= */
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.skill-tag {
+    background: var(--glass-bg);
+    backdrop-filter: blur(5px);
+    padding: 0.8rem 2rem;
+    border-radius: var(--radius-btn);
+    border: 1px solid var(--primary);
+    color: var(--text-color);
+    font-weight: 600;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    cursor: default;
+}
+
+.skill-tag:hover {
+    background: var(--primary);
+    color: white;
+    transform: scale(1.05);
+}
+
+/* =========================================
+   8. EXPERIENCE (Timeline)
+   ========================================= */
+.timeline-item {
+    padding-left: 2rem;
+    border-left: 3px solid var(--primary);
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -9px;
+    top: 0;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--primary);
+}
+
+.timeline-item h3 {
+    color: var(--heading-color);
+}
+
+.timeline-item p {
+    color: var(--text-color);
+}
+
+.date {
+    color: var(--primary);
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+/* =========================================
+   9. CONTACT & FOOTER (Last Section Fix)
+   ========================================= */
+.last-section {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    /* Content takes space, footer fits at bottom */
+    padding-bottom: 0;
+}
+
+.contact-content {
+    align-self: center;
+    justify-self: center;
+    width: 100%;
+}
+
+.contact-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2.5rem;
+    border-radius: var(--radius-card);
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: var(--input-bg);
+    color: var(--text-color);
+    /* Ensures readable text */
+    font-size: 1rem;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: 2px solid var(--primary);
+}
+
+.contact-form button {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+}
+
+/* Footer */
+footer {
+    width: 100%;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    text-align: center;
+    color: var(--text-color);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+footer .socials a {
+    color: var(--primary);
+    margin: 0 10px;
+    font-size: 1.2rem;
+}
+
+/* =========================================
+   10. MOBILE RESPONSIVE
+   ========================================= */
+@media (max-width: 768px) {
+    header {
+        padding: 10px 20px;
+        width: 95%;
+        /* Ensure the header is the positioning context */
+        position: fixed;
+    }
+
+    #home h1 {
+        font-size: 2.5rem;
+    }
+
+    /* The Vertical Menu */
+    .nav-links {
+        display: none;
+        /* Hidden by default */
+
+        /* Positioning: Floats just below the header */
+        position: absolute;
+        top: calc(100% + 15px);
+        /* 15px gap below the header pill */
+        left: 0;
+        width: 100%;
+        /* Matches the header's width exactly */
+
+        /* --- THE BLUR EFFECT (Identical to Header) --- */
+        background: var(--glass-bg);
+        /* Translucent background color */
+
+        /* This creates the blur behind the element */
+        backdrop-filter: var(--backdrop-blur);
+        -webkit-backdrop-filter: var(--backdrop-blur);
+        /* Critical for Safari/iOS */
+
+        /* Borders & Shadows to match */
+        border: var(--glass-border);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+
+        /* Shape */
+        border-radius: 30px;
+        /* Highly rounded corners */
+        padding: 2rem;
+
+        /* Layout */
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        z-index: 999;
+    }
+
+    /* Animation */
+    .nav-links.active {
+        display: flex;
+        animation: slideDown 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    /* Link Styling */
+    .nav-links a {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--heading-color);
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        border-radius: 15px;
+        /* Slight transition for hover effect */
+        transition: background 0.2s;
+    }
+
+    .nav-links a:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--primary);
+    }
+
+    .hamburger {
+        display: block;
+    }
+}
+
+/* Slide Animation */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}

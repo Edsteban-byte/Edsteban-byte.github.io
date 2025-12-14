@@ -1,40 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edgard E Jean - IT Support Specialist & Web Developer</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    
-    <header class="main-header">
-        <h1 class="logo">
-            <a href="#">Edgard E Jean</a>
-        </h1>
 
-        <nav class="main-nav" id="main-nav-menu">
-            <ul>
-                <li><a href="#" class="active">Home</a></li>
-                <li><a href="#">Projects</a></li>
-                <li><a href="#">Experiences</a></li>
-                <li><a href="#">Skills</a></li>
-                <li><a href="#">Story</a></li>
-                <li><a href="#">Contact</a></li>
+<body>
+
+    <header class="glass">
+        <div class="logo">Welcome</div>
+
+        <nav>
+            <ul class="nav-links" id="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experiences">Experiences</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#story">Story</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
 
-        <div class="header-right">
-            <button class="toggle-button" id="mode-toggle" aria-label="Toggle dark mode">☀️/🌙</button>
+        <div class="header-icons">
+            <button id="theme-toggle" aria-label="Toggle Dark Mode">
+                <i class="fas fa-moon"></i>
+            </button>
 
-            <button class="toggle-button" id="mobile-menu-toggle" aria-label="Toggle navigation menu">☰</button>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
         </div>
     </header>
 
     <main>
-        <h2>A Nice, Responsive Header</h2>
-        <p>This is the page content. Resize your browser window to see the header change for mobile devices.</p>
-        <p>The dark/light mode toggle will change the colors of the whole page.</p>
+
+        <section id="home">
+            <div class="container hidden home-grid">
+
+                <div class="intro-text">
+                    <h1>Hi, I'm <span class="highlight">Edgard Jean</span></h1>
+                    <p class="subtitle">Web Developer | Tech Enthusiast | Problem Solver</p>
+
+                    <div class="btn-group">
+                        <a href="#contact" class="btn primary-btn">Get in Touch</a>
+                        <a href="#projects" class="btn secondary-btn">View Work</a>
+                    </div>
+                </div>
+
+                <div class="profile-wrapper">
+                    <img src="./20250907_095729_1.jpg" alt="Profile Photo" class="profile-pic">
+                </div>
+
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container hidden">
+                <h2 class="section-title">Projects</h2>
+                <div class="grid-container">
+                    <div class="card glass">
+                        <h3>Project 1</h3>
+                        <p>Translucent cards with readable text in dark mode.</p>
+                        <a href="#" class="project-link">Code &rarr;</a>
+                    </div>
+                    <div class="card glass">
+                        <h3>Project 2</h3>
+                        <p>Full responsive layout with glassmorphism.</p>
+                        <a href="#" class="project-link">Code &rarr;</a>
+                    </div>
+                    <div class="card glass">
+                        <h3>Project 3</h3>
+                        <p>Interactive animations on scroll.</p>
+                        <a href="#" class="project-link">Code &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experiences">
+            <div class="container hidden">
+                <h2 class="section-title">Experiences</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>Current Role</h3>
+                        <span class="date">2023 - Present</span>
+                        <p>Company Name - Full stack development responsibilities.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Previous Role</h3>
+                        <span class="date">2020 - 2023</span>
+                        <p>Company Name - Frontend specialist and UI design.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="container hidden">
+                <h2 class="section-title">Skills</h2>
+                <div class="skills-container">
+                    <span class="skill-tag">HTML5</span>
+                    <span class="skill-tag">CSS3</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">Git</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="story">
+            <div class="container hidden">
+                <h2 class="section-title">My Story</h2>
+                <div class="card glass" style="text-align: center;">
+                    <p>Short biography connecting your background to your tech career.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="last-section">
+            <div class="container hidden contact-content">
+                <h2 class="section-title">Contact Me</h2>
+                <div class="contact-wrapper glass">
+                    <form class="contact-form">
+                        <input type="text" placeholder="Name" required>
+                        <input type="email" placeholder="Email" required>
+                        <textarea placeholder="Message" rows="4" required></textarea>
+                        <button type="submit" class="btn primary-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+
+            <footer>
+                <p>&copy; 2025 Your Name. Built with Glassmorphism.</p>
+                <div class="socials">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </footer>
+        </section>
+
     </main>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
