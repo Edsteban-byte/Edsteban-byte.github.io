@@ -61,3 +61,33 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.2 });
 
 document.querySelectorAll('section').forEach((el) => observer.observe(el));
+
+// =========================================
+// CONTACT FORM LOGIC (MAILTO)
+// =========================================
+const contactForm = document.getElementById('contactForm');
+
+contactForm.addEventListener('submit', function(e) {
+    // 1. Stop the page from reloading/submitting to a server
+    e.preventDefault();
+
+    // 2. Get the values from the form
+    const name = document.getElementById('contact-name').value;
+    const email = document.getElementById('contact-email').value;
+    const message = document.getElementById('contact-message').value;
+
+    // 3. Construct the email subject and body
+    // %0D%0A represents a line break in URLs
+    const subject = `Portfolio Contact from ${name}`;
+    const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+
+    // 4. Create the mailto link
+    // encodeURIComponent protects special characters in the message
+    const mailtoLink = `mailto:edgardetiennejean@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+
+    // 5. Open the user's mail client
+    window.location.href = mailtoLink;
+    
+    // Optional: clear form after sending
+    contactForm.reset();
+});

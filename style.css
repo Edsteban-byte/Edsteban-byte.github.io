@@ -638,3 +638,19 @@ footer .socials a {
         transform: translateY(0) scale(1);
     }
 }
+
+/* VISUAL FEEDBACK FOR REGEX VALIDATION */
+
+/* When the input is focused and invalid (doesn't match regex) */
+.contact-form input:focus:invalid,
+.contact-form textarea:focus:invalid {
+    border-color: #ef4444; /* Red color */
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+/* When the input is valid */
+.contact-form input:valid, 
+.contact-form textarea:valid {
+    border-color: #22c55e; /* Green color */
+}

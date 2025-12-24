@@ -137,10 +137,16 @@
             <div class="container hidden contact-content">
                 <h2 class="section-title">Contact Me</h2>
                 <div class="contact-wrapper glass">
-                    <form class="contact-form">
-                        <input type="text" placeholder="Name" required>
-                        <input type="email" placeholder="Email" required>
-                        <textarea placeholder="Message" rows="4" required></textarea>
+                    <form class="contact-form" id="contactForm">
+                        <input type="text" id="contact-name" placeholder="Name" required pattern=".{2,}"
+                            title="Name must be at least 2 characters long">
+
+                        <input type="email" id="contact-email" placeholder="Email" required
+                            pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+                            title="Please enter a valid email address (e.g., user@example.com)">
+
+                        <textarea id="contact-message" placeholder="Message" rows="4" required pattern=".{50,}"></textarea>
+
                         <button type="submit" class="btn primary-btn">Send Message</button>
                     </form>
                 </div>
